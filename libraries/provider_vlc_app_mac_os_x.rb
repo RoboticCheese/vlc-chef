@@ -38,13 +38,31 @@ class Chef
         # dmg_resource creates an inline remote_file, so this is all that's
         # needed.
         #
-        # (see PlexHomeTheaterApp#install!)
+        # (see VlcApp#install!)
         #
         def install!
           dmg_package 'VLC' do
             source URL
             volumes_dir 'vlc-2.2.1'
             action :install
+          end
+        end
+
+        #
+        # For lack of a package manager, delete all of VLC's directories.
+        #
+        # (see VlcApp#remove!)
+        #
+        def remove!
+          [
+            PATH,
+            ::File.expand_path('~/Library/Application Support/VLC'),
+            ::File.expand_path('~/Library/Application Support/org.videolan.vlc')
+          ].each do |d|
+            directory d do
+              recursive true
+              action :delete
+            end
           end
         end
       end

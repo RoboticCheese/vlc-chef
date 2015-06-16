@@ -17,3 +17,7 @@ suites:
     run_list:
       - recipe[vlc]
     attributes:
+  - name: uninstall
+    run_list:
+      - recipe[vlc_test::uninstall]
+    attributes:

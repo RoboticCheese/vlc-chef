@@ -32,4 +32,20 @@ describe Chef::Provider::VlcApp::MacOsX do
       p.send(:install!)
     end
   end
+
+  describe '#remove!' do
+    it 'removes all the VLC directories' do
+      p = provider
+      [
+        described_class::PATH,
+        File.expand_path('~/Library/Application Support/VLC'),
+        File.expand_path('~/Library/Application Support/org.videolan.vlc')
+      ].each do |d|
+        expect(p).to receive(:directory).with(d).and_yield
+        expect(p).to receive(:recursive).with(true)
+        expect(p).to receive(:action).with(:delete)
+      end
+      p.send(:remove!)
+    end
+  end
 end

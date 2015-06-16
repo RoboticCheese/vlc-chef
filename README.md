@@ -46,9 +46,10 @@ Syntax:
 
 Actions:
 
-| Action     | Description  |
-|------------|--------------|
-| `:install` | Do something |
+| Action     | Description       |
+|------------|-------------------|
+| `:install` | Install the app   |
+| `:remove`  | Uninstall the app |
 
 Attributes:
 
