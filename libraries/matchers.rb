@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: vlc
-# Recipe:: default
+# Library:: matchers
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -18,6 +18,12 @@
 # limitations under the License.
 #
 
-vlc_app 'default' do
-  action :install
+if defined?(ChefSpec)
+  ChefSpec.define_matcher(:vlc_app)
+
+  [:install, :remove].each do |a|
+    define_method("#{a}_vlc_app") do |name|
+      ChefSpec::Matchers::ResourceMatcher.new(:vlc_app, a, name)
+    end
+  end
 end

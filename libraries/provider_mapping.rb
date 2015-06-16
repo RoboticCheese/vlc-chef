@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: vlc
-# Recipe:: default
+# Library:: provider_mapping
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -18,6 +18,10 @@
 # limitations under the License.
 #
 
-vlc_app 'default' do
-  action :install
-end
+require 'chef/dsl'
+require 'chef/platform/provider_mapping'
+require_relative 'provider_vlc_app'
+
+Chef::Platform.set(platform: :mac_os_x,
+                   resource: :vlc_app,
+                   provider: Chef::Provider::VlcApp::MacOsX)
