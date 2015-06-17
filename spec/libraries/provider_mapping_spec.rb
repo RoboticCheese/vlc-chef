@@ -21,8 +21,8 @@ describe 'vlc::provider_mapping' do
   context 'Windows' do
     let(:platform) { :windows }
 
-    it 'returns nil' do
-      expect(app_provider).to eq(nil)
+    it 'uses the Windows app provider' do
+      expect(app_provider).to eq(Chef::Provider::VlcApp::Windows)
     end
   end
 

@@ -15,8 +15,8 @@ A Chef cookbook for VLC.
 Requirements
 ============
 
-This cookbook currently supports OS X only and uses the `dmg` cookbook to
-implement that support.
+This cookbook currently supports OS X and Windows only. It uses the `dmg` and
+`windows` community cookbooks for that support.
 
 Usage
 =====
@@ -63,6 +63,10 @@ Providers
 ***Chef::Provider::VlcApp::MacOsX***
 
 Provider for Mac OS X platforms.
+
+***Chef::Provider::VlcApp::Windows***
+
+Provider for Windows platforms.
 
 ***Chef::Provider::VlcApp***
 

@@ -8,4 +8,10 @@ describe 'vlc::app' do
       expect(subject).to be_directory
     end
   end
+
+  describe package('VLC media player'), if: os[:family] == 'windows' do
+    it 'is installed' do
+      expect(subject).to be_installed
+    end
+  end
 end

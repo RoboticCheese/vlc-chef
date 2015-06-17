@@ -25,3 +25,6 @@ require_relative 'provider_vlc_app'
 Chef::Platform.set(platform: :mac_os_x,
                    resource: :vlc_app,
                    provider: Chef::Provider::VlcApp::MacOsX)
+Chef::Platform.set(platform: :windows,
+                   resource: :vlc_app,
+                   provider: Chef::Provider::VlcApp::Windows)
