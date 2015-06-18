@@ -14,4 +14,10 @@ describe 'vlc::app' do
       expect(subject).to be_installed
     end
   end
+
+  describe package('vlc'), if: !%w(darwin windows).include?(os[:family]) do
+    it 'is installed' do
+      expect(subject).to be_installed
+    end
+  end
 end

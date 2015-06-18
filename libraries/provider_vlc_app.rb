@@ -20,6 +20,7 @@
 
 require 'chef/provider/lwrp_base'
 require_relative 'resource_vlc_app'
+require_relative 'provider_vlc_app_debian'
 require_relative 'provider_vlc_app_mac_os_x'
 require_relative 'provider_vlc_app_windows'
 
