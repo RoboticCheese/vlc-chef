@@ -29,7 +29,23 @@ describe 'vlc::provider_mapping' do
   context 'Ubuntu' do
     let(:platform) { :ubuntu }
 
-    it 'returns nil' do
+    it 'uses the Debian app provider' do
+      expect(app_provider).to eq(Chef::Provider::VlcApp::Debian)
+    end
+  end
+
+  context 'Debian' do
+    let(:platform) { :debian }
+
+    it 'uses the Debian app provider' do
+      expect(app_provider).to eq(Chef::Provider::VlcApp::Debian)
+    end
+  end
+
+  context 'CentOS' do
+    let(:platform) { :centos }
+
+    it 'has no provider' do
       expect(app_provider).to eq(nil)
     end
   end

@@ -28,3 +28,9 @@ Chef::Platform.set(platform: :mac_os_x,
 Chef::Platform.set(platform: :windows,
                    resource: :vlc_app,
                    provider: Chef::Provider::VlcApp::Windows)
+Chef::Platform.set(platform: :ubuntu,
+                   resource: :vlc_app,
+                   provider: Chef::Provider::VlcApp::Debian)
+Chef::Platform.set(platform: :debian,
+                   resource: :vlc_app,
+                   provider: Chef::Provider::VlcApp::Debian)

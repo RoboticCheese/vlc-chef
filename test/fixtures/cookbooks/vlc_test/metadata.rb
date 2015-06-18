@@ -12,4 +12,7 @@ version          '0.0.1'
 depends          'vlc'
 
 supports         'mac_os_x'
+supports         'windows'
+supports         'ubuntu'
+supports         'debian'
 # rubocop:enable SingleSpaceBeforeFirstArg
