@@ -1,6 +1,7 @@
 ---
 driver:
   name: digitalocean
+  region: nyc3
 
 platforms:
   - name: macosx
