@@ -34,3 +34,6 @@ Chef::Platform.set(platform: :ubuntu,
 Chef::Platform.set(platform: :debian,
                    resource: :vlc_app,
                    provider: Chef::Provider::VlcApp::Debian)
+Chef::Platform.set(platform: :freebsd,
+                   resource: :vlc_app,
+                   provider: Chef::Provider::VlcApp::Freebsd)

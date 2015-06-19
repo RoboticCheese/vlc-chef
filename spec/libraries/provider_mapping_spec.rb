@@ -42,6 +42,14 @@ describe 'vlc::provider_mapping' do
     end
   end
 
+  context 'FreeBSD' do
+    let(:platform) { :freebsd }
+
+    it 'uses the FreeBSD app provider' do
+      expect(app_provider).to eq(Chef::Provider::VlcApp::Freebsd)
+    end
+  end
+
   context 'CentOS' do
     let(:platform) { :centos }
 
