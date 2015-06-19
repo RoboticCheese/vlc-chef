@@ -8,3 +8,4 @@ platforms:
       name: localhost
   - name: ubuntu-14-04-x64
   - name: debian-7-0-x64
+  - name: freebsd-10-1-x64
