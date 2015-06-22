@@ -1,6 +1,9 @@
 Vlc Cookbook CHANGELOG
 ======================
 
+v?.?.? (????-??-??)
+-------------------
+
 v0.2.0 (2015-06-21)
 -------------------
 - Remove hardcoded version strings in OS X and Windows providers; get latest
