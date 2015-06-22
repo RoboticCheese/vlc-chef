@@ -19,6 +19,7 @@
 #
 
 require 'chef/provider/lwrp_base'
+require_relative 'helpers'
 require_relative 'provider_vlc_app'
 
 class Chef
@@ -28,8 +29,9 @@ class Chef
       #
       # @author Jonathan Hartman <j@p4nt5.com>
       class Windows < VlcApp
-        URL ||= 'http://get.videolan.org/vlc/2.2.1/win64/vlc-2.2.1-win64.exe'
         PATH ||= ::File.expand_path('/Program Files/VideoLAN/VLC')
+
+        include Vlc::Helpers
 
         private
 
@@ -70,8 +72,9 @@ class Chef
         # Use a remote_file resource to download the package.
         #
         def download_package
+          s = remote_path
           remote_file download_path do
-            source URL
+            source s
             action :create
             only_if { !::File.exist?(PATH) }
           end
@@ -80,10 +83,21 @@ class Chef
         #
         # Construct a download destination under Chef's cache dir.
         #
-        # @return [String]
+        # @return [String] a local file path
         #
         def download_path
-          ::File.join(Chef::Config[:file_cache_path], ::File.basename(URL))
+          ::File.join(Chef::Config[:file_cache_path],
+                      ::File.basename(remote_path))
+        end
+
+        #
+        # Use the version helper methods to construct a remote download URL.
+        #
+        # @return [String] a download URL
+        #
+        def remote_path
+          "https://get.videolan.org/vlc/#{latest_version}/win64/" \
+            "vlc-#{latest_version}-win64.exe"
         end
       end
     end

@@ -8,13 +8,6 @@ describe Chef::Provider::VlcApp::MacOsX do
   let(:new_resource) { Chef::Resource::VlcApp.new(name, nil) }
   let(:provider) { described_class.new(new_resource, nil) }
 
-  describe 'URL' do
-    it 'returns the download page URL' do
-      expected = 'http://get.videolan.org/vlc/2.2.1/macosx/vlc-2.2.1.dmg'
-      expect(described_class::URL).to eq(expected)
-    end
-  end
-
   describe 'PATH' do
     it 'returns the app directory' do
       expected = '/Applications/VLC.app'
@@ -23,10 +16,15 @@ describe Chef::Provider::VlcApp::MacOsX do
   end
 
   describe '#install!' do
+    before(:each) do
+      allow_any_instance_of(described_class).to receive(:remote_path)
+        .and_return('https://example.com/vlc.dmg')
+    end
+
     it 'uses a dmg_package to install VLC' do
       p = provider
       expect(p).to receive(:dmg_package).with('VLC').and_yield
-      expect(p).to receive(:source).with(described_class::URL)
+      expect(p).to receive(:source).with('https://example.com/vlc.dmg')
       expect(p).to receive(:volumes_dir).with('vlc-2.2.1')
       expect(p).to receive(:action).with(:install)
       p.send(:install!)
@@ -46,6 +44,18 @@ describe Chef::Provider::VlcApp::MacOsX do
         expect(p).to receive(:action).with(:delete)
       end
       p.send(:remove!)
+    end
+  end
+
+  describe '#remote_path' do
+    before(:each) do
+      allow_any_instance_of(described_class).to receive(:latest_version)
+        .and_return('1.2.3')
+    end
+
+    it 'returns a download URL' do
+      expected = 'https://get.videolan.org/vlc/1.2.3/macosx/vlc-1.2.3.dmg'
+      expect(provider.send(:remote_path)).to eq(expected)
     end
   end
 end

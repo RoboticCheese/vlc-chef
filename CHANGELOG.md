@@ -3,6 +3,8 @@ Vlc Cookbook CHANGELOG
 
 v?.?.? (????-??-??)
 -------------------
+- Remove hardcoded version strings in OS X and Windows providers; get latest
+  version from the VLC site during the Chef run
 
 v0.1.0 (2015-06-20)
 -------------------

@@ -19,6 +19,7 @@
 #
 
 require 'chef/provider/lwrp_base'
+require_relative 'helpers'
 require_relative 'provider_vlc_app'
 
 class Chef
@@ -28,8 +29,9 @@ class Chef
       #
       # @author Jonathan Hartman <j@p4nt5.com>
       class MacOsX < VlcApp
-        URL ||= 'http://get.videolan.org/vlc/2.2.1/macosx/vlc-2.2.1.dmg'
         PATH ||= '/Applications/VLC.app'
+
+        include Vlc::Helpers
 
         private
 
@@ -41,8 +43,9 @@ class Chef
         # (see VlcApp#install!)
         #
         def install!
+          s = remote_path
           dmg_package 'VLC' do
-            source URL
+            source s
             volumes_dir 'vlc-2.2.1'
             action :install
           end
@@ -64,6 +67,16 @@ class Chef
               action :delete
             end
           end
+        end
+
+        #
+        # Use the version helper methods to construct a remote download URL.
+        #
+        # @return [String] a download URL
+        #
+        def remote_path
+          "https://get.videolan.org/vlc/#{latest_version}/macosx/" \
+            "vlc-#{latest_version}.dmg"
         end
       end
     end
