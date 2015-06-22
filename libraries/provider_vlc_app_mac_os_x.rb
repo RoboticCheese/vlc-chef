@@ -44,9 +44,10 @@ class Chef
         #
         def install!
           s = remote_path
+          v = version
           dmg_package 'VLC' do
             source s
-            volumes_dir 'vlc-2.2.1'
+            volumes_dir "vlc-#{v}"
             action :install
           end
         end

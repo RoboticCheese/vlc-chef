@@ -4,6 +4,7 @@ Vlc Cookbook CHANGELOG
 v?.?.? (????-??-??)
 -------------------
 - Give the `vlc_app` resource an optional `version` attribute
+- Fix bug with OS X package's mount volume name
 
 v0.2.0 (2015-06-21)
 -------------------

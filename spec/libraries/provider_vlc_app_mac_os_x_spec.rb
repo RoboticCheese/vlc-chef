@@ -19,13 +19,15 @@ describe Chef::Provider::VlcApp::MacOsX do
     before(:each) do
       allow_any_instance_of(described_class).to receive(:remote_path)
         .and_return('https://example.com/vlc.dmg')
+      allow_any_instance_of(described_class).to receive(:version)
+        .and_return('1.2.3')
     end
 
     it 'uses a dmg_package to install VLC' do
       p = provider
       expect(p).to receive(:dmg_package).with('VLC').and_yield
       expect(p).to receive(:source).with('https://example.com/vlc.dmg')
-      expect(p).to receive(:volumes_dir).with('vlc-2.2.1')
+      expect(p).to receive(:volumes_dir).with('vlc-1.2.3')
       expect(p).to receive(:action).with(:install)
       p.send(:install!)
     end
