@@ -31,6 +31,15 @@ Recipes
 
 Installs VLC.
 
+Attributes
+==========
+
+***default***
+
+A specific version of VLC can be installed if you so desire:
+
+    default['vlc']['version'] = nil
+
 Resources
 =========
 
@@ -41,6 +50,7 @@ Used to install the VLC app.
 Syntax:
 
     vlc_app 'default' do
+        version '1.2.3'
         action :install
     end
 
@@ -53,9 +63,10 @@ Actions:
 
 Attributes:
 
-| Attribute  | Default    | Description          |
-|------------|------------|----------------------|
-| action     | `:install` | Action(s) to perform |
+| Attribute  | Default    | Description                   |
+|------------|------------|-------------------------------|
+| version    | `nil`      | A specific version to install |
+| action     | `:install` | Action(s) to perform          |
 
 Providers
 =========

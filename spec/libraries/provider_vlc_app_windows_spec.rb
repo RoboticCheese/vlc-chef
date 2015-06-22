@@ -93,13 +93,38 @@ describe Chef::Provider::VlcApp::Windows do
 
   describe '#remote_path' do
     before(:each) do
-      allow_any_instance_of(described_class).to receive(:latest_version)
+      allow_any_instance_of(described_class).to receive(:version)
         .and_return('1.2.3')
     end
 
     it 'returns a download URL' do
       expected = 'https://get.videolan.org/vlc/1.2.3/win64/vlc-1.2.3-win64.exe'
       expect(provider.send(:remote_path)).to eq(expected)
+    end
+  end
+
+  describe '#version' do
+    before(:each) do
+      allow_any_instance_of(described_class).to receive(:latest_version)
+        .and_return('2.3.4')
+    end
+
+    context 'no resource version override' do
+      it 'returns the latest version' do
+        expect(provider.send(:version)).to eq('2.3.4')
+      end
+    end
+
+    context 'a resource version override' do
+      let(:new_resource) do
+        r = super()
+        r.version('1.2.3')
+        r
+      end
+
+      it 'returns the overridden version' do
+        expect(provider.send(:version)).to eq('1.2.3')
+      end
     end
   end
 end
