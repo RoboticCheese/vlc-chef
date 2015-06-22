@@ -8,13 +8,6 @@ describe Chef::Provider::VlcApp::Windows do
   let(:new_resource) { Chef::Resource::VlcApp.new(name, nil) }
   let(:provider) { described_class.new(new_resource, nil) }
 
-  describe 'URL' do
-    it 'returns the download page URL' do
-      expected = 'http://get.videolan.org/vlc/2.2.1/win64/vlc-2.2.1-win64.exe'
-      expect(described_class::URL).to eq(expected)
-    end
-  end
-
   describe 'PATH' do
     it 'returns the app directory' do
       expected = File.expand_path('/Program Files/VideoLAN/VLC')
@@ -69,6 +62,8 @@ describe Chef::Provider::VlcApp::Windows do
 
   describe '#download_package' do
     before(:each) do
+      allow_any_instance_of(described_class).to receive(:remote_path)
+        .and_return('https://example.com/vlc.exe')
       allow_any_instance_of(described_class).to receive(:download_path)
         .and_return('/tmp/vlc.exe')
     end
@@ -76,7 +71,7 @@ describe Chef::Provider::VlcApp::Windows do
     it 'uses a remote_file to download the package' do
       p = provider
       expect(p).to receive(:remote_file).with('/tmp/vlc.exe').and_yield
-      expect(p).to receive(:source).with(described_class::URL)
+      expect(p).to receive(:source).with('https://example.com/vlc.exe')
       expect(p).to receive(:action).with(:create)
       expect(p).to receive(:only_if).and_yield
       expect(File).to receive(:exist?).with(described_class::PATH)
@@ -85,9 +80,26 @@ describe Chef::Provider::VlcApp::Windows do
   end
 
   describe '#download_path' do
+    before(:each) do
+      allow_any_instance_of(described_class).to receive(:remote_path)
+        .and_return('https://example.com/vlc-2.2.1-win64.exe')
+    end
+
     it 'returns a path in the Chef cache dir' do
       expected = "#{Chef::Config[:file_cache_path]}/vlc-2.2.1-win64.exe"
       expect(provider.send(:download_path)).to eq(expected)
+    end
+  end
+
+  describe '#remote_path' do
+    before(:each) do
+      allow_any_instance_of(described_class).to receive(:latest_version)
+        .and_return('1.2.3')
+    end
+
+    it 'returns a download URL' do
+      expected = 'https://get.videolan.org/vlc/1.2.3/win64/vlc-1.2.3-win64.exe'
+      expect(provider.send(:remote_path)).to eq(expected)
     end
   end
 end

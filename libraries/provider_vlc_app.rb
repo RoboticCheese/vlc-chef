@@ -18,6 +18,7 @@
 # limitations under the License.
 #
 
+require 'net/http'
 require 'chef/provider/lwrp_base'
 require_relative 'resource_vlc_app'
 require_relative 'provider_vlc_app_debian'
