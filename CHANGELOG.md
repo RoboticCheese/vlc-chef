@@ -1,6 +1,9 @@
 Vlc Cookbook CHANGELOG
 ======================
 
+v?.?.? (????-??-??)
+-------------------
+
 v0.3.0 (2015-06-23)
 -------------------
 - Give the `vlc_app` resource an optional `version` attribute
