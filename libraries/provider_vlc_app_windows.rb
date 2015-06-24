@@ -96,8 +96,17 @@ class Chef
         # @return [String] a download URL
         #
         def remote_path
-          "https://get.videolan.org/vlc/#{latest_version}/win64/" \
-            "vlc-#{latest_version}-win64.exe"
+          "https://get.videolan.org/vlc/#{version}/win64/vlc-#{version}-" \
+            'win64.exe'
+        end
+
+        #
+        # Return either the new_resource's version or get the latest one.
+        #
+        # @return [String] a version string for this provider to use
+        #
+        def version
+          new_resource.version || latest_version
         end
       end
     end

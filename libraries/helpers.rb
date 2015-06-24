@@ -64,5 +64,16 @@ module Vlc
         Net::HTTP.start(u.host, u.port, opts) { |h| h.get(u) }.body
       end
     end
+
+    #
+    # Determine whether a given string is a valid version.
+    #
+    # @param arg [String] a potential version string
+    #
+    # @return [TrueClass, FalseClass] whether the string is valid
+    #
+    def self.valid_version?(arg)
+      arg.match(/^[0-9]+\.[0-9]+\.[0-9]+$/) ? true : false
+    end
   end
 end

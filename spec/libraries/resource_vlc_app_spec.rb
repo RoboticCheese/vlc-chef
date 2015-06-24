@@ -60,4 +60,37 @@ describe Chef::Resource::VlcApp do
       end
     end
   end
+
+  describe '#version' do
+    let(:version) { nil }
+    let(:resource) do
+      r = super()
+      r.version(version) unless version.nil?
+      r
+    end
+
+    context 'default' do
+      let(:version) { nil }
+
+      it 'returns nil' do
+        expect(resource.version).to eq(nil)
+      end
+    end
+
+    context 'a valid override' do
+      let(:version) { '1.2.3' }
+
+      it 'returns the override' do
+        expect(resource.version).to eq('1.2.3')
+      end
+    end
+
+    context 'an invalid override' do
+      let(:version) { 'x.y.z' }
+
+      it 'raises an error' do
+        expect { resource }.to raise_error(Chef::Exceptions::ValidationFailed)
+      end
+    end
+  end
 end

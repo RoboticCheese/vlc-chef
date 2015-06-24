@@ -41,6 +41,7 @@ class Chef
         def install!
           include_recipe 'freebsd::portsnap'
           package 'vlc' do
+            version new_resource.version
             action :install
           end
         end

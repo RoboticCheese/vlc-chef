@@ -58,4 +58,33 @@ describe Vlc::Helpers do
       expect(test_obj.vlc_site_body).to eq(body)
     end
   end
+
+  describe '#valid_version?' do
+    let(:version) { nil }
+    let(:res) { described_class.valid_version?(version) }
+
+    context 'a valid version string' do
+      let(:version) { '1.2.3' }
+
+      it 'returns true' do
+        expect(res).to eq(true)
+      end
+    end
+
+    context 'an invalid version string' do
+      let(:version) { 'x.y.z' }
+
+      it 'returns false' do
+        expect(res).to eq(false)
+      end
+    end
+
+    context 'a .beta version string' do
+      let(:version) { '1.2.3.beta.1' }
+
+      it 'returns false' do
+        expect(res).to eq(false)
+      end
+    end
+  end
 end

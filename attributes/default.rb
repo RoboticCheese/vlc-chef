@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: vlc
-# Recipe:: default
+# Attributes:: default
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -18,7 +18,4 @@
 # limitations under the License.
 #
 
-vlc_app 'default' do
-  version node['vlc']['version']
-  action :install
-end
+default['vlc']['version'] = nil

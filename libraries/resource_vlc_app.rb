@@ -19,6 +19,7 @@
 #
 
 require 'chef/resource/lwrp_base'
+require_relative 'helpers'
 
 class Chef
   class Resource
@@ -37,6 +38,16 @@ class Chef
                 kind_of: [NilClass, TrueClass, FalseClass],
                 default: nil
       alias_method :installed?, :installed
+
+      #
+      # Allow a user to install a specific version of VLC.
+      #
+      attribute :version,
+                kind_of: [NilClass, String],
+                default: nil,
+                callbacks: {
+                  'Invalid version' => ->(a) { Vlc::Helpers.valid_version?(a) }
+                }
     end
   end
 end

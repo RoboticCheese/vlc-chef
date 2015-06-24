@@ -44,9 +44,10 @@ class Chef
         #
         def install!
           s = remote_path
+          v = version
           dmg_package 'VLC' do
             source s
-            volumes_dir 'vlc-2.2.1'
+            volumes_dir "vlc-#{v}"
             action :install
           end
         end
@@ -75,8 +76,16 @@ class Chef
         # @return [String] a download URL
         #
         def remote_path
-          "https://get.videolan.org/vlc/#{latest_version}/macosx/" \
-            "vlc-#{latest_version}.dmg"
+          "https://get.videolan.org/vlc/#{version}/macosx/vlc-#{version}.dmg"
+        end
+
+        #
+        # Return either the new_resource's version or get the latest one.
+        #
+        # @return [String] a version string for this provider to use
+        #
+        def version
+          new_resource.version || latest_version
         end
       end
     end

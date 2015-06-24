@@ -42,6 +42,7 @@ class Chef
         def install!
           include_recipe 'apt'
           package 'vlc' do
+            version new_resource.version
             action :install
           end
         end
