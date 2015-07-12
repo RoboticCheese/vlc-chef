@@ -31,6 +31,8 @@ class Chef
       class Freebsd < VlcApp
         include Chef::DSL::IncludeRecipe
 
+        provides :vlc_app, platform: 'freebsd'
+
         private
 
         #

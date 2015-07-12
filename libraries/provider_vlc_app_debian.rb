@@ -31,6 +31,8 @@ class Chef
       class Debian < VlcApp
         include Chef::DSL::IncludeRecipe
 
+        provides :vlc_app, platform_family: 'debian'
+
         private
 
         #

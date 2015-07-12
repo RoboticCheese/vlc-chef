@@ -3,6 +3,7 @@ Vlc Cookbook CHANGELOG
 
 v?.?.? (????-??-??)
 -------------------
+- Update provider resolution to most current style
 
 v0.3.0 (2015-06-23)
 -------------------
