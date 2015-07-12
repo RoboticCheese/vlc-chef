@@ -33,6 +33,8 @@ class Chef
 
         include Vlc::Helpers
 
+        provides :vlc_app, platform_family: 'mac_os_x'
+
         private
 
         #
