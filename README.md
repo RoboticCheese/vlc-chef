@@ -1,11 +1,15 @@
 Vlc Cookbook
 ============
 [![Cookbook Version](https://img.shields.io/cookbook/v/vlc.svg)][cookbook]
-[![Build Status](https://img.shields.io/travis/RoboticCheese/vlc-chef.svg)][travis]
+[![Linux Build Status](https://img.shields.io/circleci/project/RoboticCheese/vlc-chef.svg)][circle]
+[![OS X Build Status](https://img.shields.io/travis/RoboticCheese/vlc-chef.svg)][travis]
+[![Windows Build Status](https://img.shields.io/appveyor/ci/RoboticCheese/vlc-chef.svg)][appveyor]
 [![Code Climate](https://img.shields.io/codeclimate/github/RoboticCheese/vlc-chef.svg)][codeclimate]
 [![Coverage Status](https://img.shields.io/coveralls/RoboticCheese/vlc-chef.svg)][coveralls]
 
 [cookbook]: https://supermarket.chef.io/cookbooks/vlc
+[circle]: https://circleci.com/gh/RoboticCheese/vlc-chef
+[appveyor]: https://ci.appveyor.com/project/RoboticCheese/vlc-chef
 [travis]: https://travis-ci.org/RoboticCheese/vlc-chef
 [codeclimate]: https://codeclimate.com/github/RoboticCheese/vlc-chef
 [coveralls]: https://coveralls.io/r/RoboticCheese/vlc-chef
