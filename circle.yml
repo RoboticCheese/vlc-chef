@@ -19,4 +19,4 @@ test:
   override:
     - bundle exec rake
     - rvm-exec 2.0.0-p645 bundle exec rake
-    - bundle exec kitchen verify -c 3
+    - bundle exec kitchen verify
