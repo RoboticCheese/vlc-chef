@@ -7,11 +7,9 @@ machine:
 dependencies:
   pre:
     - rvm install 2.0.0-p645
-    - rvm install 1.9.3-p545
   override:
     - bundle update
     - rvm-exec 2.0.0-p645 bundle update
-    - rvm-exec 1.9.3-p545 bundle update
   cache_directories:
     - /home/ubuntu/.rvm/gems
 
