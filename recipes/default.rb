@@ -19,6 +19,6 @@
 #
 
 vlc_app 'default' do
-  version node['vlc']['version']
+  version node['vlc']['version'] if node['vlc']['version']
   action :install
 end
