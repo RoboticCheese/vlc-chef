@@ -5,8 +5,9 @@ require_relative '../../libraries/provider_vlc_app_windows'
 
 describe Chef::Provider::VlcApp::Windows do
   let(:name) { 'default' }
-  let(:new_resource) { Chef::Resource::VlcApp.new(name, nil) }
-  let(:provider) { described_class.new(new_resource, nil) }
+  let(:run_context) { ChefSpec::SoloRunner.new.converge.run_context }
+  let(:new_resource) { Chef::Resource::VlcApp.new(name, run_context) }
+  let(:provider) { described_class.new(new_resource, run_context) }
 
   describe 'PATH' do
     it 'returns the app directory' do
@@ -100,8 +101,9 @@ describe Chef::Provider::VlcApp::Windows do
     end
 
     it 'returns a path in the Chef cache dir' do
-      expected = "#{Chef::Config[:file_cache_path]}/vlc-2.2.1-win64.exe"
-      expect(provider.send(:download_path)).to eq(expected)
+      expect(provider.send(:download_path)).to eq(
+        "#{Chef::Config[:file_cache_path]}/vlc-2.2.1-win64.exe"
+      )
     end
   end
 
