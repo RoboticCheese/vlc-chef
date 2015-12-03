@@ -19,8 +19,13 @@ A Chef cookbook for VLC.
 Requirements
 ============
 
-This cookbook currently supports OS X, Windows, Ubuntu/Debian, and FreeBSD. It
-uses the dmg, windows, apt, and freebsd community cookbooks for that support.
+This cookbook currently supports a number of platforms. It uses the dmg,
+windows, apt, and freebsd community cookbooks for OS X, Windows, Ubuntu/Debian,
+and FreeBSD support, respectively.
+
+For RHEL support, it uses the [Nux Dextop](http://li.nux.ro/repos.html) YUM
+repo (which also depends on EPEL), as EPEL has no VLC packages and RPMForge
+doesn't have any for RHEL 7.
 
 Usage
 =====
@@ -86,6 +91,10 @@ Provider for Windows platforms.
 ***Chef::Provider::VlcApp::Debian***
 
 Provider for Ubuntu/Debian platforms.
+
+***Chef::Provider::VlcApp::Rhel***
+
+Provider for RHEL and RHEL-alike platforms.
 
 ***Chef::Provider::VlcApp::Freebsd***
 
