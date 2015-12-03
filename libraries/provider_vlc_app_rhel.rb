@@ -49,7 +49,7 @@ class Chef
             gpgkey 'http://li.nux.ro/download/nux/RPM-GPG-KEY-nux.ro'
           end
           package 'vlc' do
-            version new_resource.version
+            version new_resource.version if new_resource.version
           end
         end
 

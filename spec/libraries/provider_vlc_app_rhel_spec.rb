@@ -34,11 +34,12 @@ describe Chef::Provider::VlcApp::Rhel do
     let(:node) { ChefSpec::Macros.stub_node('node.example', platform) }
     let(:new_resource) do
       r = super()
-      r.version(version)
+      r.version(version) if version
       r
     end
 
     before(:each) do
+      allow_any_instance_of(described_class).to receive(:node).and_return(node)
       %i(include_recipe yum_repository package).each do |m|
         allow_any_instance_of(described_class).to receive(m)
       end
@@ -67,12 +68,16 @@ describe Chef::Provider::VlcApp::Rhel do
       it 'installs VLC' do
         p = provider
         expect(p).to receive(:package).with('vlc').and_yield
-        expect(p).to receive(:version).with(version)
+        if version
+          expect(p).to receive(:version).with(version)
+        else
+          expect(p).to_not receive(:version)
+        end
         p.send(:install!)
       end
     end
 
-    %w(7.1 6.7).each do |pv|
+    %w(7.0 6.6).each do |pv|
       context "CentOS #{pv}" do
         let(:platform) { { platform: 'centos', version: pv } }
 
