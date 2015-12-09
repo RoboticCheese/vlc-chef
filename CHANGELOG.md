@@ -1,7 +1,7 @@
 Vlc Cookbook CHANGELOG
 ======================
 
-v?.?.? (????-??-??)
+v1.0.0 (2015-12-09)
 -------------------
 - Update to Chef custom resources (breaking compatibility with Chef < 12.5)
 - Add RHEL support
