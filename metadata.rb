@@ -7,7 +7,7 @@ maintainer_email 'j@p4nt5.com'
 license          'apache2'
 description      'Installs VLC'
 long_description 'Installs VLC'
-version          '1.0.0'
+version          '1.0.1'
 
 depends          'dmg', '~> 2.2'
 depends          'windows', '~> 1.37'
