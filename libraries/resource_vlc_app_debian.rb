@@ -1,7 +1,7 @@
 # Encoding: UTF-8
 #
 # Cookbook Name:: vlc
-# Library:: resource_vlc_app
+# Library:: resource_vlc_app_debian
 #
 # Copyright 2015 Jonathan Hartman
 #
@@ -18,28 +18,34 @@
 # limitations under the License.
 #
 
-require 'chef/resource'
-require_relative 'helpers'
+require_relative 'resource_vlc_app'
 
 class Chef
   class Resource
-    # A Chef resource for the VLC app.
+    # A Debian/Ubuntu implementation of the vlc_app resource.
     #
     # @author Jonathan Hartman <j@p4nt5.com>
-    class VlcApp < Resource
-      property :version,
-               [String, nil],
-               default: nil,
-               callbacks: {
-                 'Invalid version' => ->(a) { Vlc::Helpers.valid_version?(a) }
-               }
+    class VlcAppDebian < VlcApp
+      provides :vlc_app, platform_family: 'debian'
 
-      default_action :install
+      #
+      # Use a regular package resource to install VLC, since it's available
+      # in APT.
+      #
+      action :install do
+        include_recipe 'apt'
+        package 'vlc' do
+          version new_resource.version
+          action :install
+        end
+      end
 
-      %i(install remove).each do |a|
-        action a do
-          fail(NotImplementedError,
-               "Action `#{a}` must be implemented for `#{self.class}` resource")
+      #
+      # Use a regular package resource to uninstall VLC.
+      #
+      action :remove do
+        package 'vlc' do
+          action :remove
         end
       end
     end

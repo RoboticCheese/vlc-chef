@@ -3,8 +3,10 @@ Vlc Cookbook CHANGELOG
 
 v?.?.? (????-??-??)
 -------------------
-- Update provider resolution to most current style
+- Update to Chef custom resources (breaking compatibility with Chef < 12.5)
 - Add RHEL support
+- Change the `node['vlc']['version']` attribute to the better-namespaced
+  `node['vlc']['app']['version']`
 
 v0.3.0 (2015-06-23)
 -------------------

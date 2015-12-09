@@ -19,6 +19,11 @@ A Chef cookbook for VLC.
 Requirements
 ============
 
+As of v1.0.0, Chef 12.5 is generally required, though it may be possible to use
+it in earlier versions of Chef 12 via the
+[compat_resource](https://supermarket.chef.io/cookbooks/compat_resource)
+cookbook.
+
 This cookbook currently supports a number of platforms. It uses the dmg,
 windows, apt, and freebsd community cookbooks for OS X, Windows, Ubuntu/Debian,
 and FreeBSD support, respectively.
@@ -38,7 +43,7 @@ Recipes
 
 ***default***
 
-Installs VLC.
+Performs an attribute-driven install of VLC.
 
 Attributes
 ==========
@@ -47,14 +52,15 @@ Attributes
 
 A specific version of VLC can be installed if you so desire:
 
-    default['vlc']['version'] = nil
+    default['vlc']['app']['version'] = nil
 
 Resources
 =========
 
 ***vlc_app***
 
-Used to install the VLC app.
+A platform-agnostic parent resource that defines the properties and actions for
+all the platform-specific child resources.
 
 Syntax:
 
@@ -77,32 +83,25 @@ Attributes:
 | version    | `nil`      | A specific version to install |
 | action     | `:install` | Action(s) to perform          |
 
-Providers
-=========
+***vlc_app_mac_os_x***
 
-***Chef::Provider::VlcApp::MacOsX***
+OS X implementation of the `vlc_app` resource.
 
-Provider for Mac OS X platforms.
+***vlc_app_windows***
 
-***Chef::Provider::VlcApp::Windows***
+Windows implementation of the `vlc_app` resource.
 
-Provider for Windows platforms.
+***vlc_app_debian***
 
-***Chef::Provider::VlcApp::Debian***
+Debian/Ubuntu implementation of the `vlc_app` resource.
 
-Provider for Ubuntu/Debian platforms.
+***vlc_app_rhel***
 
-***Chef::Provider::VlcApp::Rhel***
+RHEL (and RHEL-alike) implementation of the `vlc_app` resource.
 
-Provider for RHEL and RHEL-alike platforms.
+***vlc_app_freebsd***
 
-***Chef::Provider::VlcApp::Freebsd***
-
-Provider for FreeBSD platforms.
-
-***Chef::Provider::VlcApp***
-
-A parent provider for all the platform-specific providers to subclass.
+FreeBSD implementation of the `vlc_app` resource.
 
 Contributing
 ============

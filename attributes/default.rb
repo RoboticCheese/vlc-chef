@@ -18,4 +18,4 @@
 # limitations under the License.
 #
 
-default['vlc']['version'] = nil
+default['vlc']['app']['version'] = nil
