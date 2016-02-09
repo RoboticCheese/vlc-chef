@@ -1,6 +1,5 @@
 # Encoding: UTF-8
-#
-# rubocop:disable SingleSpaceBeforeFirstArg
+
 name             'vlc'
 maintainer       'Jonathan Hartman'
 maintainer_email 'j@p4nt5.com'
@@ -24,4 +23,3 @@ supports         'redhat'
 supports         'centos'
 supports         'scientific'
 supports         'freebsd'
-# rubocop:enable SingleSpaceBeforeFirstArg
