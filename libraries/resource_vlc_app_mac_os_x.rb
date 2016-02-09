@@ -29,7 +29,7 @@ class Chef
     class VlcAppMacOsX < VlcApp
       include Vlc::Helpers
 
-      PATH ||= '/Applications/VLC.app'
+      PATH ||= '/Applications/VLC.app'.freeze
 
       provides :vlc_app, platform_family: 'mac_os_x'
 
