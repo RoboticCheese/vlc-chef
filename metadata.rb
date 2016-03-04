@@ -10,7 +10,7 @@ version          '1.0.1'
 
 depends          'dmg', '~> 2.2'
 depends          'windows', '~> 1.37'
-depends          'apt', '~> 2.7'
+depends          'apt', '~> 3.0'
 depends          'yum', '~> 3.8'
 depends          'yum-epel', '~> 0.6'
 depends          'freebsd', '~> 0.3'
